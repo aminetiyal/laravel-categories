@@ -27,7 +27,8 @@ class Category extends Model implements Sortable
      */
     public function categorizable()
     {
-        return $this->morphTo();
+        return $this->morphTo()
+            ->withDefault(['categorizable_id' => 0, 'categorizable_type' => 0]);
     }
 
     public function parent()
