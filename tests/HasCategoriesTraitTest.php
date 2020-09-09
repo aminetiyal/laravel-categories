@@ -13,7 +13,7 @@ class HasCategoriesTraitTest extends TestCase
     {
         parent::setUp();
 
-        $this->testModel = HasCategoriesTestModel::create(['name' => 'default']);
+        $this->testModel = factory(HasCategoriesTestModel::class)->create();
     }
 
     /** @test */
@@ -21,6 +21,7 @@ class HasCategoriesTraitTest extends TestCase
     {
         $this->assertInstanceOf(MorphMany::class, $this->testModel->categories());
     }
+
     /** @test */
     public function a_parent_model_can_has_many_categories()
     {

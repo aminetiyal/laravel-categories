@@ -3,6 +3,8 @@
 namespace Aminetiyal\LaravelCategories\Tests;
 
 use Aminetiyal\LaravelCategories\Category;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class CategoryTest extends TestCase
 {
@@ -32,6 +34,28 @@ class CategoryTest extends TestCase
         $category->delete();
 
         $this->assertCount(0, Category::all());
+    }
+
+    /** @test */
+    public function it_provides_a_categories_relation()
+    {
+        $category = factory(Category::class)->create();
+
+        $this->assertInstanceOf(HasMany::class, $category->categories());
+    }
+
+    /** @test */
+    public function it_provides_a_parent_model_relation()
+    {
+        $parent = HasCategoriesTestModel::create(['name' => 'default']);
+
+        $category = factory(Category::class)->create();
+
+        $category->categorizable()->associate($parent);
+
+        $category->save();
+
+        $this->assertInstanceOf(MorphTo::class, $category->categorizable());
     }
 
     /** @test */
