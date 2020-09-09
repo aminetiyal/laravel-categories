@@ -35,4 +35,27 @@ class Category extends Model implements Sortable
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
+
+
+    /**
+     * Set 0 instead of null value in categorizable_id to prevent unique with null issue
+     *
+     * @param integer $value
+     * @return void
+     */
+    public function setCategorizableIdAttribute($value)
+    {
+        $this->attributes['categorizable_id'] = empty($value) ? 0 : $value;
+    }
+
+    /**
+     * Set 0 instead of null value in categorizable_type to prevent unique with null issue
+     *
+     * @param string $value
+     * @return void
+     */
+    public function setCategorizableTypeAttribute($value)
+    {
+        $this->attributes['categorizable_type'] = empty($value) ? 0 : $value;
+    }
 }
