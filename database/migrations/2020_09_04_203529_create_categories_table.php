@@ -19,14 +19,14 @@ class CreateCategoriesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('description')->nullable();
             $table->integer('order_column')->nullable();
-            $table->unsignedBigInteger('parent_id')->default(0);
+            $table->unsignedBigInteger('category_id')->default(0);
             $table->string('categorizable_type')->default(0);
             $table->unsignedBigInteger('categorizable_id')->default(0);
 
             $table->index(['categorizable_type', 'categorizable_id']);
 
             $table->timestamps();
-        $table->unique(['name', 'parent_id','categorizable_type', 'categorizable_id'], 'unique_category_with_parent_and_categorizable');
+        $table->unique(['name', 'category_id','categorizable_type', 'categorizable_id'], 'unique_category_with_parent_and_categorizable');
         });
     }
 

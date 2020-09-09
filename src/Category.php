@@ -19,7 +19,7 @@ class Category extends Model implements Sortable
 
     public function categories()
     {
-        return $this->hasMany(Category::class, 'parent_id');
+        return $this->hasMany(Category::class, 'category_id');
     }
 
     /**
@@ -33,7 +33,7 @@ class Category extends Model implements Sortable
 
     public function parent()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
 

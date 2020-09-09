@@ -14,6 +14,6 @@ $factory->define(Category::class, function (Faker $faker) {
 
 $factory->state(Category::class, 'child', function (Faker $faker) {
     return [
-        'parent_id' => factory(Category::class)->create()->id
+        'category_id' => factory(Category::class)->create()->id
     ];
 });
