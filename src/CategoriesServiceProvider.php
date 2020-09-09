@@ -4,7 +4,7 @@ namespace Aminetiyal\LaravelCategories;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelCategoriesServiceProvider extends ServiceProvider
+class CategoriesServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -12,7 +12,7 @@ class LaravelCategoriesServiceProvider extends ServiceProvider
     public function boot()
     {
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadFactoriesFrom(__DIR__.'/../database/factories');
+        $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
