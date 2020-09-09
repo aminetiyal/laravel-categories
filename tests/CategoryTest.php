@@ -55,4 +55,27 @@ class CategoryTest extends TestCase
 
         $this->assertInstanceOf(Category::class, $subCategory->parent);
     }
+
+    /** @test */
+    public function a_category_belongs_to_parent_model()
+    {
+        $parent = HasCategoriesTestModel::create(['name' => 'default']);
+
+        $category = factory(Category::class)->create();
+
+        $category->categorizable()->associate($parent);
+
+        $category->save();
+
+        $this->assertInstanceOf(HasCategoriesTestModel::class, $category->categorizable);
+    }
+
+
+    /** @test */
+    public function a_category_who_doesnt_belongs_to_parent_model_return_default_value()
+    {
+        $category = factory(Category::class)->create();
+
+        $this->assertEquals(["categorizable_id" => 0,"categorizable_type" => 0], $category->categorizable->toArray());
+    }
 }

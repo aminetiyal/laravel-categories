@@ -21,4 +21,17 @@ class HasCategoriesTraitTest extends TestCase
     {
         $this->assertInstanceOf(MorphMany::class, $this->testModel->categories());
     }
+    /** @test */
+    public function a_parent_model_can_has_many_categories()
+    {
+        $category = factory(Category::class)->create();
+
+        $category->categorizable()->associate($this->testModel);
+
+        $category->save();
+
+        $this->assertTrue($this->testModel->categories->contains($category));
+
+        $this->assertEquals(1, $this->testModel->categories->count());
+    }
 }
