@@ -51,10 +51,5 @@ class LaravelCategoriesServiceProvider extends ServiceProvider
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-categories');
-
-        // Register the main class to use with the facade
-        $this->app->singleton('laravel-categories', function () {
-            return new LaravelCategories;
-        });
     }
 }
